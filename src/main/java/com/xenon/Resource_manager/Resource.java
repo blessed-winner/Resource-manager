@@ -3,34 +3,28 @@ package com.xenon.Resource_manager;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Column(name = "email", unique = true)
-    private String email;
+    @Column(name = "name", unique = true)
+    private String name;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "type")
+    private String type;
 
-    @Column(name = "role")
-    private Role role;
+    @ManyToOne
+    @Column(name = "user_id")
+    private User owner;
 
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @OneToMany(mappedBy = "user")
-    private List<Resource> resources = new ArrayList<>();
 
     @PrePersist
     void onCreate(){
