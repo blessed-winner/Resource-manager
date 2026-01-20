@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
 
@@ -29,6 +29,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
@@ -49,5 +50,10 @@ public class User {
     @PreUpdate
     void onUpdate(){
         updatedAt = LocalDateTime.now();
+    }
+
+    public void addResource(Resource resource){
+         this.resources.add(resource);
+         resource.setOwner(this);
     }
 }

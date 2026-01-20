@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 public class Resource {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
 
