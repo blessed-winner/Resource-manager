@@ -7,7 +7,8 @@ import java.util.UUID;
 
 public class Resource {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "name", unique = true)
@@ -17,7 +18,7 @@ public class Resource {
     private String type;
 
     @ManyToOne
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User owner;
 
     @Column(name = "created_at")
